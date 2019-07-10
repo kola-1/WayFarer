@@ -21,4 +21,19 @@ describe('Authentication controller methods', () => {
                 done();
             });
     });
+    it('should signin a registered user', (done) => {
+        chai.request(app)
+            .post('/api/v1/auth/signin')
+            .send({
+                email: 'user@mail.com', password: 'userPassword'
+            })
+            .end((err, res) => {
+                expect(res.body).to.have.property('data');
+                expect(res.body.data).to.have.property('user_id');
+                expect(res.body.data).to.have.property('is_admin');
+                expect(res.body.data).to.have.property('token');
+                expect(res.status).to.equal(200);
+                done();
+            });
+    });
 });
