@@ -1,7 +1,8 @@
 {
     "env": {
-        "browser": true,
-        "es6": true
+        "node": true,
+        "es6": true,
+        "mocha": true
     },
     "extends": "airbnb-base",
     "globals": {
@@ -13,5 +14,16 @@
         "sourceType": "module"
     },
     "rules": {
+        "indent": ["error", 4],
+        "linebreak-style":"off",
+        "consistent-return":"off",
+        "comma-dangle":"off",
+        "camelcase": "off",
+        "import/no-unresolved": [
+            "off",
+            {
+            "commonjs": true
+            }
+        ]
     }
 }

@@ -1,2 +1,11 @@
 ## Node modules
 node_modules
+
+## Environment variables
+.env
+
+## Nyc output
+.nyc_output
+
+## Dist directory
+dist
