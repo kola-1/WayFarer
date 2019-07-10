@@ -10,14 +10,12 @@ const signToken = (data, expiredTime) => {
 };
 
 const assignToken = (req, res, next) => {
-    // get user data from req object
-    const {
-        first_name, last_name, email, password
-    } = req.body;
+    const { email } = req.body;
+    const { hashedPassword } = req.hashedPassword;
 
     // assign the signed token
     const token = signToken({
-        first_name, last_name, email, password
+        email, hashedPassword
     }, '5h');
 
     // add token to request body

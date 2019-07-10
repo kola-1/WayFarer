@@ -33,6 +33,26 @@ class AuthController {
             });
         });
     }
+
+
+    /**
+    * Signin a user
+    *@param {*} req The request *.
+    *@param {*} res The response *.
+    *@returns {object} returns response *
+    */
+    static signIn(req, res) {
+        const { token, userInfo } = req;
+
+        return res.status(200).json({
+            status: 'success',
+            data: {
+                user_id: userInfo.user_id,
+                is_admin: userInfo.is_admin,
+                token
+            }
+        });
+    }
 }
 
 export default AuthController;

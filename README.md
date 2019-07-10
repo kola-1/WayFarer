@@ -26,6 +26,7 @@ git clone https://github.com/kola-1/WayFarer.git
 ```
 ### Features
 - User can sign up
+- User can sign in
 
 ### Technologies
 These are some of the softwares this project is created with:
