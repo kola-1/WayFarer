@@ -4,7 +4,9 @@ const encryptPassword = (req, res, next) => {
     const { password } = req.body;
     const hashedPassword = bcrypt.hashSync(password, 10);
 
-    req.hashedPassword = hashedPassword;
+    const userInfo = { userPassword: hashedPassword };
+
+    req.userInfo = userInfo;
 
     next();
 };

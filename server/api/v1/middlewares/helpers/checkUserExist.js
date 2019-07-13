@@ -4,9 +4,9 @@ import errors from '../errors/errorHandler';
 const checkUserExist = (req, res, next) => {
     const { email } = req.body;
 
-    const text = 'SELECT EXISTS(SELECT id FROM users WHERE email= $1);';
+    const queryString = 'SELECT EXISTS(SELECT id FROM users WHERE email= $1);';
 
-    db.query(text, [email], (err, data) => {
+    db.query(queryString, [email], (err, data) => {
         if (err) {
             return errors.serverError(res);
         }

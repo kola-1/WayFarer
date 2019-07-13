@@ -13,7 +13,8 @@ const pool = new Pool({
 
 
 const db = {
-    query: (text, params, callback) => pool.query(text, params, callback)
+    query: (text, params, callback) => pool.query(text, params, callback),
+    connect: () => pool.connect()
 };
 
 export default db;

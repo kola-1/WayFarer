@@ -15,6 +15,17 @@ const Schema = {
             .required(),
         email: Joi.string().email().required(),
         password: Joi.string().min(8).required()
+    },
+    tripSchema: {
+        bus_id: Joi.number().integer().positive().required(),
+        origin: Joi.string().required(),
+        destination: Joi.string().required(),
+        trip_date: Joi.date(),
+        fare: Joi.number().positive().max(999999).required()
+    },
+    userSchema: {
+        user_id: Joi.number().integer().positive(),
+        is_admin: Joi.string().valid('true', 'false')
     }
 };
 

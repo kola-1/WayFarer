@@ -4,9 +4,9 @@ import errors from '../errors/errorHandler';
 const getUserData = (req, res, next) => {
     const { email } = req.body;
 
-    const text = 'SELECT id, password, is_admin FROM users WHERE email= $1;';
+    const queryString = 'SELECT id, password, is_admin FROM users WHERE email= $1;';
 
-    db.query(text, [email], (err, data) => {
+    db.query(queryString, [email], (err, data) => {
         if (err) {
             return errors.serverError(res);
         }
@@ -15,14 +15,12 @@ const getUserData = (req, res, next) => {
         }
         const userInfo = {
             user_id: data.rows[0].id,
-            is_admin: data.rows[0].is_admin
+            is_admin: data.rows[0].is_admin,
+            password: data.rows[0].password
         };
-
-        const hashedPassword = data.rows[0].password;
 
         req.userInfo = userInfo;
 
-        req.hashedPassword = hashedPassword;
         next();
     });
 };
