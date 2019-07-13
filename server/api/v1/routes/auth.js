@@ -13,9 +13,23 @@ const router = express.Router();
 const { validateSignup, validateSignin } = validateAuth;
 
 // Signup a user
-router.post('/signup', validateSignup, checkUserExist, encryptPassword, assignToken, Authcontroller.signUp);
+const signUp = [
+    validateSignup,
+    checkUserExist,
+    encryptPassword,
+    assignToken,
+    Authcontroller.signUp
+];
+router.post('/signup', signUp);
 
 // Signin a user
-router.post('/signin', validateSignin, getUserData, verifyPassword, assignToken, Authcontroller.signIn);
+const signIn = [
+    validateSignin,
+    getUserData,
+    verifyPassword,
+    assignToken,
+    Authcontroller.signIn
+];
+router.post('/signin', signIn);
 
 export default router;

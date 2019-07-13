@@ -14,10 +14,10 @@ class AuthController {
             first_name, last_name, email
         } = req.body;
 
-        const { token, hashedPassword } = req;
+        const { token, userInfo } = req;
 
         const queryString = 'INSERT INTO users(first_name, last_name, email, password) values($1, $2, $3, $4) RETURNING id, is_admin';
-        const queryValues = [first_name, last_name, email, hashedPassword];
+        const queryValues = [first_name, last_name, email, userInfo.userPassword];
         db.query(queryString, queryValues, (err, user) => {
             if (err) {
                 return errors.serverError(res);

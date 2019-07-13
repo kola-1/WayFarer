@@ -35,7 +35,8 @@ const tableSchema = `
         "manufacturer" TEXT NOT NULL,
         "model" TEXT NOT NULL,
         "year" INT NOT NULL,
-        "capacity" INT NOT NULL
+        "capacity" INT NOT NULL,
+        "available" BOOLEAN NOT NULL DEFAULT 'true'
     ) WITH (
         OIDS=FALSE
     );
@@ -45,8 +46,8 @@ const tableSchema = `
         "bus_id" INT NOT NULL REFERENCES buses(id),
         "origin" TEXT NOT NULL,
         "destination" TEXT NOT NULL,
-        "trip_date" DATE NOT NULL,
-        "fare" NUMERIC(10, 2) NOT NULL,
+        "trip_date" DATE NOT NULL DEFAULT NOW(),
+        "fare" NUMERIC(6, 2) NOT NULL,
         "status" TEXT NOT NULL DEFAULT 'active'
     ) WITH (
         OIDS=FALSE

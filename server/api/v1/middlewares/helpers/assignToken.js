@@ -11,12 +11,16 @@ const signToken = (data, expiredTime) => {
 
 const assignToken = (req, res, next) => {
     const { email } = req.body;
-    const { hashedPassword } = req.hashedPassword;
+    let { is_admin } = req.userInfo;
+
+    if (is_admin === undefined) {
+        is_admin = false;
+    }
 
     // assign the signed token
     const token = signToken({
-        email, hashedPassword
-    }, '5h');
+        is_admin, email
+    }, '10h');
 
     // add token to request body
     req.token = token;
