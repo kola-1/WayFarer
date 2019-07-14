@@ -22,4 +22,13 @@ const createTrip = [
 router.post('/', createTrip);
 
 
+// View all trip
+const viewTrips = [
+    verifyRequestToken,
+    validateUser,
+    TripController.viewTrips
+];
+router.get('/', viewTrips);
+
+
 export default router;
