@@ -7,7 +7,7 @@ const errorLog = debug('query:error');
 
 class TripController {
     /**
-    * Signup a user
+    * Create a trip
     *@param {object} req The request *.
     *@param {object} res The response *.
     *@returns {object} returns response *
@@ -60,6 +60,26 @@ class TripController {
                 client.release();
             }
         })();
+    }
+
+
+    /**
+  * View all trips
+  *@param {object} req The request *.
+  *@param {object} res The response *.
+  *@returns {object} returns response *
+  */
+    static viewTrips(req, res) {
+        const queryString = 'SELECT id AS trip_id, bus_id, origin, destination, trip_date, fare, status FROM trips';
+        db.query(queryString, (err, data) => {
+            if (err) {
+                return errors.serverError(res);
+            }
+            return res.status(200).json({
+                status: 'success',
+                data: data.rows
+            });
+        });
     }
 }
 

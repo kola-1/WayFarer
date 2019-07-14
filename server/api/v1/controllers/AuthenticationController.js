@@ -37,8 +37,8 @@ class AuthController {
 
     /**
     * Signin a user
-    *@param {*} req The request *.
-    *@param {*} res The response *.
+    *@param {object} req The request *.
+    *@param {object} res The response *.
     *@returns {object} returns response *
     */
     static signIn(req, res) {

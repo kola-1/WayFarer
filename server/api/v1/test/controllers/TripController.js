@@ -49,4 +49,36 @@ describe('Trip controller methods', () => {
                     });
             });
     });
+    it('should view all trip', (done) => {
+        chai.request(app)
+            .post('/api/v1/auth/signin')
+            .send({
+                email: 'admin@mail.com', password: process.env.ADMIN_PASSWORD
+            })
+            .end((err, res) => {
+                expect(res.status).to.equal(200);
+                token = bearer + res.body.data.token;
+                chai.request(app)
+                    .get('/api/v1/trips')
+                    .set('Authorization', token)
+                    .send({
+                        token
+                    })
+                    .end((error, response) => {
+                        expect(res.body).to.have.property('status');
+                        expect(res.body.status).to.equal('success');
+                        expect(response.body).to.have.property('data');
+                        expect(response.body.data).to.be.an('array');
+                        expect(response.body.data[0]).to.have.property('trip_id');
+                        expect(response.body.data[0]).to.have.property('bus_id');
+                        expect(response.body.data[0]).to.have.property('origin');
+                        expect(response.body.data[0]).to.have.property('destination');
+                        expect(response.body.data[0]).to.have.property('trip_date');
+                        expect(response.body.data[0]).to.have.property('fare');
+                        expect(response.body.data[0]).to.have.property('status');
+                        expect(response.status).to.equal(200);
+                        done();
+                    });
+            });
+    });
 });
