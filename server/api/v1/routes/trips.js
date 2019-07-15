@@ -4,6 +4,7 @@ import confirmRole from '../middlewares/helpers/confirmRole';
 import validateUser from '../middlewares/validations/validateUsers';
 import validateTrips from '../middlewares/validations/validateTrips';
 import confirmAvailableBus from '../middlewares/helpers/confirmAvailableBus';
+import confirmTripExist from '../middlewares/helpers/confirmTripExist';
 import TripController from '../controllers/TripController';
 
 
@@ -30,6 +31,17 @@ const viewTrips = [
     TripController.viewTrips
 ];
 router.get('/', viewTrips);
+
+
+// Cancel a trip
+const cancelTrips = [
+    verifyRequestToken,
+    validateUser,
+    confirmRole.admin,
+    confirmTripExist,
+    TripController.cancelTrip
+];
+router.patch('/:id', cancelTrips);
 
 
 export default router;
