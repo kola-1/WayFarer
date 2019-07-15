@@ -8,6 +8,8 @@ import checkDuplicateBooking from '../middlewares/helpers/checkDuplicateBooking'
 import getBusCapacity from '../middlewares/helpers/getBusCapacity';
 import checkBookingAvailability from '../middlewares/helpers/checkBookingAvailability';
 import assignSeat from '../middlewares/helpers/assignSeat';
+import getRoleType from '../middlewares/helpers/getRoleType';
+import checkUserBookingExist from '../middlewares/helpers/checkUserBookingExist';
 import BookingController from '../controllers/BookingController';
 
 
@@ -30,5 +32,15 @@ const bookATrip = [
 ];
 router.post('/', bookATrip);
 
+// View bookings
+const viewBookings = [
+    verifyRequestToken,
+    validateUser,
+    getRoleType,
+    fetchUserInfo,
+    checkUserBookingExist,
+    BookingController.fetchBookings
+];
+router.get('/', viewBookings);
 
 export default router;

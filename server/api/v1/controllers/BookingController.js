@@ -40,6 +40,47 @@ class BookingController {
             });
         });
     }
+
+
+    /**
+  * View all bookings
+  *@param {object} req The request *.
+  *@param {object} res The response *.
+  *@returns {object} returns response *
+  */
+    static fetchBookings(req, res) {
+        const { role } = req;
+        const { user_id } = req.userInfo;
+
+        let queryString;
+        let queryValue;
+
+        if (role === 'admin') {
+            queryString = 'SELECT bookings.id AS booking_id, user_id,  trip_id, bus_id, trip_date, seat_number, first_name, last_name, email FROM trips INNER JOIN bookings ON (bookings.trip_id = trips.id) INNER JOIN users ON (bookings.user_id = users.id)';
+
+            db.query(queryString, (err, data) => {
+                if (err) {
+                    return errors.serverError(res);
+                }
+                return res.status(200).json({
+                    status: 'success',
+                    data: data.rows
+                });
+            });
+        } else {
+            queryString = 'SELECT bookings.id AS booking_id, user_id,  trip_id, bus_id, trip_date, seat_number, first_name, last_name, email FROM trips INNER JOIN bookings ON (bookings.trip_id = trips.id) INNER JOIN users ON (bookings.user_id = users.id) WHERE user_id = $1';
+            queryValue = [user_id];
+            db.query(queryString, queryValue, (err, data) => {
+                if (err) {
+                    return errors.serverError(res);
+                }
+                return res.status(200).json({
+                    status: 'success',
+                    data: data.rows
+                });
+            });
+        }
+    }
 }
 
 export default BookingController;
