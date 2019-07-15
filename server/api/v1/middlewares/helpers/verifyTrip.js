@@ -20,7 +20,7 @@ const verifyTrip = (req, res, next) => {
             status: data.rows[0].status
         };
         if (tripInfo.status !== 'active') {
-            return errors.badRequestError(res, 'the specified trip is not available');
+            return errors.forbiddenError(res, 'the specified trip is not available');
         }
         req.tripInfo = tripInfo;
 
