@@ -2,13 +2,14 @@ import express from 'express';
 import verifyRequestToken from '../middlewares/helpers/verifyRequestToken';
 import confirmRole from '../middlewares/helpers/confirmRole';
 import validateUser from '../middlewares/validations/validateUsers';
-import validateTrip from '../middlewares/validations/validateTrips';
+import validateTrips from '../middlewares/validations/validateTrips';
 import confirmAvailableBus from '../middlewares/helpers/confirmAvailableBus';
 import TripController from '../controllers/TripController';
 
 
 const router = express.Router();
 
+const { validateTrip } = validateTrips;
 
 // Create a trip
 const createTrip = [

@@ -3,6 +3,7 @@ import trimmer from 'trim-request-body';
 import cors from 'cors';
 import auth from './routes/auth';
 import trips from './routes/trips';
+import bookings from './routes/bookings';
 
 export default (wayfarer) => {
     // allow cross origin access
@@ -20,6 +21,7 @@ export default (wayfarer) => {
     // Pass request to routes
     wayfarer.use('/api/v1/auth', auth);
     wayfarer.use('/api/v1/trips', trips);
+    wayfarer.use('/api/v1/bookings', bookings);
 
     wayfarer.use('*', (req, res) => {
         res.status(200).json({

@@ -29,6 +29,7 @@ git clone https://github.com/kola-1/WayFarer.git
 - User/Admin can sign in
 - Admin can create trips
 - User/Admin can view all trips
+- User can book a trip
 
 ### Technologies
 These are some of the softwares this project is created with:

@@ -17,6 +17,7 @@ const Schema = {
         password: Joi.string().min(8).required()
     },
     tripSchema: {
+        trip_id: Joi.number().integer().positive().required(),
         bus_id: Joi.number().integer().positive().required(),
         origin: Joi.string().required(),
         destination: Joi.string().required(),
