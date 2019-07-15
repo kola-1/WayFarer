@@ -81,6 +81,32 @@ class TripController {
             });
         });
     }
+
+
+    /**
+  * Cancel a trip
+  *@param {object} req The request *.
+  *@param {object} res The response *.
+  *@returns {object} returns response *
+  */
+    static cancelTrip(req, res) {
+        const { params } = req;
+
+        const queryString = 'UPDATE trips SET status = $1 WHERE id = $2';
+        const queryValue = ['cancelled', params.id];
+
+        db.query(queryString, queryValue, (err) => {
+            if (err) {
+                return errors.serverError(res);
+            }
+            return res.status(200).json({
+                status: 'success',
+                data: {
+                    message: 'Trip cancelled successfully'
+                }
+            });
+        });
+    }
 }
 
 export default TripController;

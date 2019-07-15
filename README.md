@@ -33,6 +33,7 @@ git clone https://github.com/kola-1/WayFarer.git
 - User can view all his or her bookings
 - Admin can view all bookings
 - User can delete his or her booking
+- Admin can cancel a trip
 
 ### Technologies
 These are some of the softwares this project is created with:
