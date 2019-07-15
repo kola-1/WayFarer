@@ -8,6 +8,7 @@ dotenv.config();
 
 const infoLog = debug('query:info');
 const adminPassword = bcrypt.hashSync(process.env.ADMIN_PASSWORD, 10);
+const firstUser1Password = bcrypt.hashSync(process.env.USER1_PASSWORD, 10);
 
 const tableSchema = `
     DROP TABLE IF EXISTS users CASCADE;
@@ -77,6 +78,13 @@ const tableSchema = `
         'admin@mail.com', 
         '${adminPassword}',
         'true'
+    ),
+    (
+        'firstuser1firstname', 
+        'firstuser1lastname', 
+        'firstuser1@mail.com', 
+        '${firstUser1Password}',
+        'false'
     );
 
     INSERT INTO buses ( 
@@ -94,6 +102,20 @@ const tableSchema = `
         '32'
     ),
     (
+        'kja-193aa', 
+        'tata motors', 
+        'Starbus 32', 
+        '2017', 
+        '32'
+    ),
+    (
+        'gge-aa689', 
+        'volvo', 
+        'volvo 9700', 
+        '2018', 
+        '49'
+    ),
+    (
         'gge-aa689', 
         'volvo', 
         'volvo 9700', 
@@ -106,6 +128,40 @@ const tableSchema = `
         '0500r', 
         '2012', 
         '59'
+    );
+    INSERT INTO trips ( 
+        bus_id, 
+        origin, 
+        destination, 
+        fare
+        ) 
+    VALUES (
+        '1', 
+        'kano', 
+        'jos',  
+        '3244'
+    ),
+    (
+        '3', 
+        'lagos', 
+        'jos', 
+        '4944'
+    ),
+    (
+        '2', 
+        'abuja', 
+        'benue', 
+        '5933'
+    );
+    INSERT INTO bookings ( 
+        trip_id, 
+        user_id,
+        seat_number  
+        ) 
+    VALUES (
+        '3', 
+        '1',
+        '5'
     );
 `;
 

@@ -32,8 +32,8 @@ describe('Trip controller methods', () => {
                         fare: '3333.00'
                     })
                     .end((error, response) => {
-                        expect(res.body).to.have.property('status');
-                        expect(res.body.status).to.equal('success');
+                        expect(response.body).to.have.property('status');
+                        expect(response.body.status).to.equal('success');
                         expect(response.body).to.have.property('data');
                         expect(response.body.data).to.have.property('trip_id');
                         expect(response.body.data).to.have.property('origin');
@@ -65,8 +65,8 @@ describe('Trip controller methods', () => {
                         token
                     })
                     .end((error, response) => {
-                        expect(res.body).to.have.property('status');
-                        expect(res.body.status).to.equal('success');
+                        expect(response.body).to.have.property('status');
+                        expect(response.body.status).to.equal('success');
                         expect(response.body).to.have.property('data');
                         expect(response.body.data).to.be.an('array');
                         expect(response.body.data[0]).to.have.property('trip_id');
