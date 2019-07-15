@@ -10,6 +10,7 @@ import checkBookingAvailability from '../middlewares/helpers/checkBookingAvailab
 import assignSeat from '../middlewares/helpers/assignSeat';
 import getRoleType from '../middlewares/helpers/getRoleType';
 import checkUserBookingExist from '../middlewares/helpers/checkUserBookingExist';
+import verifyDeletePermission from '../middlewares/helpers/verifyDeletePermission';
 import BookingController from '../controllers/BookingController';
 
 
@@ -42,5 +43,15 @@ const viewBookings = [
     BookingController.fetchBookings
 ];
 router.get('/', viewBookings);
+
+// Delete booking
+const deleteBooking = [
+    verifyRequestToken,
+    validateUser,
+    fetchUserInfo,
+    verifyDeletePermission,
+    BookingController.delete
+];
+router.delete('/:id', deleteBooking);
 
 export default router;

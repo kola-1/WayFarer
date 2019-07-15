@@ -81,6 +81,32 @@ class BookingController {
             });
         }
     }
+
+
+    /**
+  * Delete a booking
+  *@param {object} req The request *.
+  *@param {object} res The response *.
+  *@returns {object} returns response *
+  */
+    static delete(req, res) {
+        const { params } = req;
+
+        const queryString = 'DELETE FROM bookings WHERE id = $1';
+        const queryValue = [params.id];
+
+        db.query(queryString, queryValue, (err) => {
+            if (err) {
+                return errors.serverError(res);
+            }
+            return res.status(200).json({
+                status: 'success',
+                data: {
+                    message: 'Booking deleted successfully'
+                }
+            });
+        });
+    }
 }
 
 export default BookingController;

@@ -115,4 +115,41 @@ describe('Booking controller methods', () => {
                     });
             });
     });
+    it('user can delete booking', (done) => {
+        chai.request(app)
+            .post('/api/v1/auth/signin')
+            .send({
+                email: 'admin@mail.com', password: process.env.ADMIN_PASSWORD
+            })
+            .end((err, res) => {
+                expect(res.status).to.equal(200);
+                token = bearer + res.body.data.token;
+                chai.request(app)
+                    .post('/api/v1/bookings')
+                    .set('Authorization', token)
+                    .send({
+                        token,
+                        trip_id: '2',
+                        seat_number: '22'
+                    })
+                    .end(() => {
+                        expect(res.status).to.equal(200);
+                        chai.request(app)
+                            .delete('/api/v1/bookings/3')
+                            .set('Authorization', token)
+                            .send({
+                                token
+                            })
+                            .end((error, response) => {
+                                expect(response.body).to.have.property('status');
+                                expect(response.body.status).to.equal('success');
+                                expect(response.body).to.have.property('data');
+                                expect(response.body.data).to.have.property('message');
+                                expect(response.body.data.message).to.equal('Booking deleted successfully');
+                                expect(response.status).to.equal(200);
+                                done();
+                            });
+                    });
+            });
+    });
 });
