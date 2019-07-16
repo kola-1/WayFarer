@@ -24,6 +24,13 @@ const Schema = {
         trip_date: Joi.date(),
         fare: Joi.number().positive().max(999999).required()
     },
+    busSchema: {
+        number_plate: Joi.string().required(),
+        manufacturer: Joi.string().required(),
+        model: Joi.string().required(),
+        year: Joi.number().positive().required(),
+        capacity: Joi.number().positive().max(100).required()
+    },
     userSchema: {
         user_id: Joi.number().integer().positive(),
         is_admin: Joi.string().valid('true', 'false')
