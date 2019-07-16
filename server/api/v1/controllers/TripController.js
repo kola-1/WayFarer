@@ -70,10 +70,23 @@ class TripController {
   *@returns {object} returns response *
   */
     static viewTrips(req, res) {
-        const queryString = 'SELECT id, bus_id, origin, destination, trip_date, fare, status FROM trips';
+        const { origin, destination } = req.query;
+
+        let queryString;
+
+        if (origin === undefined && destination === undefined) {
+            queryString = 'SELECT id, bus_id, origin, destination, trip_date, fare, status FROM trips';
+        } else if (origin === undefined) {
+            queryString = `SELECT id, bus_id, origin, destination, trip_date, fare, status FROM trips WHERE destination = '${destination}'`;
+        } else {
+            queryString = `SELECT id, bus_id, origin, destination, trip_date, fare, status FROM trips WHERE origin = '${origin}'`;
+        }
         db.query(queryString, (err, data) => {
             if (err) {
                 return errors.serverError(res);
+            }
+            if (data.rows[0] === undefined) {
+                return errors.notFoundError(res, 'No trips found');
             }
             return res.status(200).json({
                 status: 'success',
