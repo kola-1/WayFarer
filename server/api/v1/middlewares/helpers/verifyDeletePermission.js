@@ -6,9 +6,9 @@ const verifyDeletePermission = (req, res, next) => {
 
     const { params } = req;
 
-    const queryString = 'SELECT user_id FROM bookings WHERE id= $1;';
+    const queryString = 'SELECT trip_id, user_id FROM bookings WHERE trip_id= $1 AND user_id= $2;';
 
-    db.query(queryString, [params.id], (err, data) => {
+    db.query(queryString, [params.id, user_id], (err, data) => {
         if (err) {
             return errors.serverError(res);
         }

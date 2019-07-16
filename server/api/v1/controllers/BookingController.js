@@ -27,7 +27,7 @@ class BookingController {
             return res.status(201).json({
                 status: 'success',
                 data: {
-                    booking_id: bookingData.rows[0].id,
+                    id: bookingData.rows[0].id,
                     user_id: bookingData.rows[0].user_id,
                     trip_id: bookingData.rows[0].trip_id,
                     bus_id,
@@ -56,7 +56,7 @@ class BookingController {
         let queryValue;
 
         if (role === 'admin') {
-            queryString = 'SELECT bookings.id AS booking_id, user_id,  trip_id, bus_id, trip_date, seat_number, first_name, last_name, email FROM trips INNER JOIN bookings ON (bookings.trip_id = trips.id) INNER JOIN users ON (bookings.user_id = users.id)';
+            queryString = 'SELECT bookings.id, user_id,  trip_id, bus_id, trip_date, seat_number, first_name, last_name, email FROM trips INNER JOIN bookings ON (bookings.trip_id = trips.id) INNER JOIN users ON (bookings.user_id = users.id)';
 
             db.query(queryString, (err, data) => {
                 if (err) {
@@ -68,7 +68,7 @@ class BookingController {
                 });
             });
         } else {
-            queryString = 'SELECT bookings.id AS booking_id, user_id,  trip_id, bus_id, trip_date, seat_number, first_name, last_name, email FROM trips INNER JOIN bookings ON (bookings.trip_id = trips.id) INNER JOIN users ON (bookings.user_id = users.id) WHERE user_id = $1';
+            queryString = 'SELECT bookings.id, user_id,  trip_id, bus_id, trip_date, seat_number, first_name, last_name, email FROM trips INNER JOIN bookings ON (bookings.trip_id = trips.id) INNER JOIN users ON (bookings.user_id = users.id) WHERE user_id = $1';
             queryValue = [user_id];
             db.query(queryString, queryValue, (err, data) => {
                 if (err) {

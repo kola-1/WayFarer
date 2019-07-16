@@ -35,7 +35,7 @@ describe('Trip controller methods', () => {
                         expect(response.body).to.have.property('status');
                         expect(response.body.status).to.equal('success');
                         expect(response.body).to.have.property('data');
-                        expect(response.body.data).to.have.property('trip_id');
+                        expect(response.body.data).to.have.property('id');
                         expect(response.body.data).to.have.property('origin');
                         expect(response.body.data.origin).to.equal('lagos');
                         expect(response.body.data).to.have.property('destination');
@@ -69,7 +69,7 @@ describe('Trip controller methods', () => {
                         expect(response.body.status).to.equal('success');
                         expect(response.body).to.have.property('data');
                         expect(response.body.data).to.be.an('array');
-                        expect(response.body.data[0]).to.have.property('trip_id');
+                        expect(response.body.data[0]).to.have.property('id');
                         expect(response.body.data[0]).to.have.property('bus_id');
                         expect(response.body.data[0]).to.have.property('origin');
                         expect(response.body.data[0]).to.have.property('destination');

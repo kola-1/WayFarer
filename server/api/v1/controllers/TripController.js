@@ -36,7 +36,7 @@ class TripController {
                 await client.query('BEGIN');
                 const { rows } = await client.query(queryString, queryValues);
                 const data = {
-                    trip_id: rows[0].id,
+                    id: rows[0].id,
                     bus_id: rows[0].bus_id,
                     origin: rows[0].origin,
                     destination: rows[0].destination,
@@ -70,7 +70,7 @@ class TripController {
   *@returns {object} returns response *
   */
     static viewTrips(req, res) {
-        const queryString = 'SELECT id AS trip_id, bus_id, origin, destination, trip_date, fare, status FROM trips';
+        const queryString = 'SELECT id, bus_id, origin, destination, trip_date, fare, status FROM trips';
         db.query(queryString, (err, data) => {
             if (err) {
                 return errors.serverError(res);

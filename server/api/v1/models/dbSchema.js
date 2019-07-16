@@ -48,7 +48,7 @@ const tableSchema = `
         "origin" TEXT NOT NULL,
         "destination" TEXT NOT NULL,
         "trip_date" DATE NOT NULL DEFAULT NOW(),
-        "fare" NUMERIC(6, 2) NOT NULL,
+        "fare" NUMERIC(10, 2) NOT NULL,
         "status" TEXT NOT NULL DEFAULT 'active'
     ) WITH (
         OIDS=FALSE
