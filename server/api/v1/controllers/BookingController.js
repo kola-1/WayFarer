@@ -27,7 +27,8 @@ class BookingController {
             return res.status(201).json({
                 status: 'success',
                 data: {
-                    id: bookingData.rows[0].id,
+                    id: bookingData.rows[0].trip_id,
+                    booking_id: bookingData.rows[0].id,
                     user_id: bookingData.rows[0].user_id,
                     trip_id: bookingData.rows[0].trip_id,
                     bus_id,

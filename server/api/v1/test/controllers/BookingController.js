@@ -32,6 +32,7 @@ describe('Booking controller methods', () => {
                         expect(response.body.status).to.equal('success');
                         expect(response.body).to.have.property('data');
                         expect(response.body.data).to.have.property('id');
+                        expect(response.body.data).to.have.property('booking_id');
                         expect(response.body.data).to.have.property('user_id');
                         expect(response.body.data).to.have.property('trip_id');
                         expect(response.body.data).to.have.property('bus_id');
