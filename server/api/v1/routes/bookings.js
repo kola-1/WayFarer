@@ -2,6 +2,7 @@ import express from 'express';
 import verifyRequestToken from '../middlewares/helpers/verifyRequestToken';
 import validateUser from '../middlewares/validations/validateUsers';
 import validateTrips from '../middlewares/validations/validateTrips';
+import validateBookings from '../middlewares/validations/validateBookings';
 import verifyTrip from '../middlewares/helpers/verifyTrip';
 import fetchUserInfo from '../middlewares/helpers/fetchUserInfo';
 import checkDuplicateBooking from '../middlewares/helpers/checkDuplicateBooking';
@@ -23,6 +24,7 @@ const bookATrip = [
     verifyRequestToken,
     validateUser,
     validateTripId,
+    validateBookings,
     verifyTrip,
     fetchUserInfo,
     checkDuplicateBooking,
