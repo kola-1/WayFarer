@@ -34,7 +34,10 @@ const Schema = {
     userSchema: {
         user_id: Joi.number().integer().positive(),
         is_admin: Joi.string().valid('true', 'false')
-    }
+    },
+    bookingSchema: {
+        seat_number: Joi.number().integer().positive(),
+    },
 };
 
 export default Schema;
