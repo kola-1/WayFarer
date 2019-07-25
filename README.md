@@ -13,6 +13,7 @@ WayFarer is a public bus transportation booking server.
 - [Technologies](#Technologies)
 - [Setup](#Setup)
 - [Testing And Coverage](#Testing-And-Coverage)
+- [Links](#Links)
 - [Author](#Author)
 - [License](#License)
 - [Acknowledegments](#Acknowledegments)
@@ -63,6 +64,8 @@ npm run start-dev
 ```
 - *remember to add the **environment variables** as required in the **.env.config file***
 
+- *you can access the server locally on **port 7000** i.e `localhost:7000`*
+
 ### Testing And Coverage
 To run test and to get test coverage use the following command:
 
@@ -75,6 +78,10 @@ npm test
 ```
 npm run test-coverage
 ```
+
+### Links
+- [Documentation](https://wayfarer-1.herokuapp.com/api/v1/docs)
+- [API URL](https://wayfarer-1.herokuapp.com/)
 
 ### Author
 - Kola Akindoju

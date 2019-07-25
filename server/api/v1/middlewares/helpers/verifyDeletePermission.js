@@ -15,10 +15,6 @@ const verifyDeletePermission = (req, res, next) => {
         if (data.rows[0] === undefined) {
             return errors.notFoundError(res, 'The specified booking you are trying to delete does not exist');
         }
-        if (data.rows[0].user_id !== user_id) {
-            return errors.forbiddenError(res, 'You are not allowed to perform this action');
-        }
-
         next();
     });
 };
