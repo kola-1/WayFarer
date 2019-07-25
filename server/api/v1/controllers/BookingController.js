@@ -33,7 +33,7 @@ class BookingController {
                     trip_id: bookingData.rows[0].trip_id,
                     bus_id,
                     trip_date,
-                    seat_number: bookingData.rows[0].id,
+                    seat_number: bookingData.rows[0].seat_number,
                     first_name,
                     last_name,
                     email
@@ -91,10 +91,11 @@ class BookingController {
   *@returns {object} returns response *
   */
     static delete(req, res) {
+        const { user_id } = req.userInfo;
         const { params } = req;
 
-        const queryString = 'DELETE FROM bookings WHERE id = $1';
-        const queryValue = [params.id];
+        const queryString = 'DELETE FROM bookings WHERE trip_id = $1 and user_id =$2';
+        const queryValue = [params.id, user_id];
 
         db.query(queryString, queryValue, (err) => {
             if (err) {

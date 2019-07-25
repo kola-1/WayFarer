@@ -1,0 +1,927 @@
+{
+	"openapi": "3.0.1",
+	"info": {
+		"title": "WayFarer",
+		"description": "WayFarer is a public bus transportation booking server.    ",
+		"contact": {
+			"email": "kolaakindoju@gmail.com"
+		},
+		"version": "1.0.0"
+	},
+	"servers": [
+		{
+			"url": "https://wayfarer-1.herokuapp.com/"
+		}
+	],
+	"tags": [
+		{
+			"name": "Users",
+			"description": "Operation(s) concerning users in the application"
+		},
+		{
+			"name": "Trips",
+			"description": "Operation(s) concerning trips in the application"
+		},
+		{
+			"name": "Bookings",
+			"description": "Operation(s) concerning bookings in the application"
+		},
+		{
+			"name": "Buses",
+			"description": "Operations concerning buses in the application"
+		}
+	],
+	"paths": {
+		"/api/v1/auth/signup": {
+			"post": {
+				"tags": [
+					"Users"
+				],
+				"summary": "Create a new user",
+				"description": "Endpoint to register a user",
+				"operationId": "registerUser",
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/x-www-form-urlencoded": {
+							"schema": {
+								"$ref": "#/components/schemas/Auth-signup-request"
+							}
+						},
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Auth-signup-request"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Successful operation",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Auth-post-response"
+								}
+							}
+						}
+					},
+					"4XX": {
+						"description": "Client errors",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error-response"
+								}
+							}
+						}
+					},
+					"5XX": {
+						"description": "Server errors",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error-response"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/auth/signin": {
+			"post": {
+				"tags": [
+					"Users"
+				],
+				"summary": "Login a user",
+				"description": "Endpoint to login a user",
+				"operationId": "loginUser",
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/x-www-form-urlencoded": {
+							"schema": {
+								"$ref": "#/components/schemas/Auth-signin-request"
+							}
+						},
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Auth-signin-request"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful operation",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Auth-post-response"
+								}
+							}
+						}
+					},
+					"4XX": {
+						"description": "Client errors",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error-response"
+								}
+							}
+						}
+					},
+					"5XX": {
+						"description": "Server errors",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error-response"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/trips": {
+			"post": {
+				"tags": [
+					"Trips"
+				],
+				"summary": "Create a trip",
+				"description": "This can only be done by a logged in admin.",
+				"operationId": "createTrip",
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/x-www-form-urlencoded": {
+							"schema": {
+								"$ref": "#/components/schemas/Trips-post-request"
+							}
+						},
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Trips-post-request"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Successful operation",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Trips-post-response"
+								}
+							}
+						}
+					},
+					"4XX": {
+						"description": "Client errors",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error-response"
+								}
+							}
+						}
+					},
+					"5XX": {
+						"description": "Server errors",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error-response"
+								}
+							}
+						}
+					}
+				},
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				]
+			},
+			"get": {
+				"tags": [
+					"Trips"
+				],
+				"summary": "Get all trips",
+				"description": "This can only be done by a logged in user or admin.",
+				"operationId": "getTrips",
+				"parameters": [
+					{
+						"name": "origin",
+						"in": "query",
+						"description": "To get trips by origin (optional)",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "destination",
+						"in": "query",
+						"description": "To get trips by destination (optional)",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful operation",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Trips-get-response"
+								}
+							}
+						}
+					},
+					"4XX": {
+						"description": "Client errors",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error-response"
+								}
+							}
+						}
+					},
+					"5XX": {
+						"description": "Server errors",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error-response"
+								}
+							}
+						}
+					}
+				},
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				]
+			}
+		},
+		"/api/v1/trips/{id}": {
+			"patch": {
+				"tags": [
+					"Trips"
+				],
+				"summary": "Cancel a trip",
+				"description": "This can only be done by a logged in admin.",
+				"operationId": "cancelTrip",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"description": "ID of trip to be cancelled",
+						"required": true,
+						"schema": {
+							"type": "integer"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful operation",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Trips-patch-response"
+								}
+							}
+						}
+					},
+					"4XX": {
+						"description": "Client errors",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error-response"
+								}
+							}
+						}
+					},
+					"5XX": {
+						"description": "Server errors",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error-response"
+								}
+							}
+						}
+					}
+				},
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				]
+			}
+		},
+		"/api/v1/bookings": {
+			"post": {
+				"tags": [
+					"Bookings"
+				],
+				"summary": "Book a trip",
+				"description": "This can only be done by a logged in user.",
+				"operationId": "bookTrip",
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/x-www-form-urlencoded": {
+							"schema": {
+								"$ref": "#/components/schemas/Bookings-post-request"
+							}
+						},
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Bookings-post-request"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Successful operation",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Bookings-post-response"
+								}
+							}
+						}
+					},
+					"4XX": {
+						"description": "Client errors",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error-response"
+								}
+							}
+						}
+					},
+					"5XX": {
+						"description": "Server errors",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error-response"
+								}
+							}
+						}
+					}
+				},
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				]
+			},
+			"get": {
+				"tags": [
+					"Bookings"
+				],
+				"summary": "Get bookings",
+				"description": "This can only be done by a logged in user or admin.",
+				"operationId": "getBookings",
+				"responses": {
+					"200": {
+						"description": "Successful operation",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Bookings-get-response"
+								}
+							}
+						}
+					},
+					"4XX": {
+						"description": "Client errors",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error-response"
+								}
+							}
+						}
+					},
+					"5XX": {
+						"description": "Server errors",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error-response"
+								}
+							}
+						}
+					}
+				},
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				]
+			}
+		},
+		"/api/v1/bookings/{id}": {
+			"delete": {
+				"tags": [
+					"Bookings"
+				],
+				"summary": "Delete a booking",
+				"description": "This can only be done by a logged in user.",
+				"operationId": "deleteBooking",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"description": "ID of trip to be cancelled",
+						"required": true,
+						"schema": {
+							"type": "integer"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful operation",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Bookings-delete-response"
+								}
+							}
+						}
+					},
+					"4XX": {
+						"description": "Client errors",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error-response"
+								}
+							}
+						}
+					},
+					"5XX": {
+						"description": "Server errors",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error-response"
+								}
+							}
+						}
+					}
+				},
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				]
+			}
+		},
+		"/api/v1/buses": {
+			"post": {
+				"tags": [
+					"Buses"
+				],
+				"summary": "Add a bus",
+				"description": "This can only be done by a logged in admin.",
+				"operationId": "addBus",
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/x-www-form-urlencoded": {
+							"schema": {
+								"$ref": "#/components/schemas/Buses-post-request"
+							}
+						},
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Buses-post-request"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Successful operation",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Buses-post-response"
+								}
+							}
+						}
+					},
+					"4XX": {
+						"description": "Client errors",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error-response"
+								}
+							}
+						}
+					},
+					"5XX": {
+						"description": "Server errors",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Error-response"
+								}
+							}
+						}
+					}
+				},
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				]
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"Error-response": {
+				"type": "object",
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"error": {
+						"type": "string"
+					},
+					"...": {
+						"type": "object"
+					}
+				}
+			},
+			"Auth-signup-request": {
+				"type": "object",
+				"properties": {
+					"first_name": {
+						"type": "string"
+					},
+					"last_name": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string",
+						"format": "email"
+					},
+					"password": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"first_name",
+					"last_name",
+					"email",
+					"password"
+				]
+			},
+			"Auth-signin-request": {
+				"type": "object",
+				"properties": {
+					"email": {
+						"type": "string",
+						"format": "email"
+					},
+					"password": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"email",
+					"password"
+				]
+			},
+			"Auth-post-response": {
+				"type": "object",
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"data": {
+						"type": "object",
+						"properties": {
+							"user_id": {
+								"type": "integer"
+							},
+							"is_admin": {
+								"type": "boolean"
+							},
+							"token": {
+								"type": "string"
+							}
+						}
+					}
+				}
+			},
+			"Trips-post-request": {
+				"type": "object",
+				"properties": {
+					"bus_id": {
+						"type": "integer"
+					},
+					"origin": {
+						"type": "string"
+					},
+					"destination": {
+						"type": "string"
+					},
+					"trip_date": {
+						"type": "string",
+						"format": "date"
+					},
+					"fare": {
+						"type": "integer"
+					}
+				},
+				"required": [
+					"bus_id",
+					"origin",
+					"destination",
+					"trip_date",
+					"fare"
+				]
+			},
+			"Trips-post-response": {
+				"type": "object",
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"data": {
+						"type": "object",
+						"properties": {
+							"id": {
+								"type": "integer"
+							},
+							"bus_id": {
+								"type": "integer"
+							},
+							"origin": {
+								"type": "string"
+							},
+							"destination": {
+								"type": "string"
+							},
+							"trip_date": {
+								"type": "string",
+								"format": "date"
+							},
+							"fare": {
+								"type": "integer"
+							}
+						}
+					}
+				}
+			},
+			"Trips-get-response": {
+				"type": "object",
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"data": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"id": {
+									"type": "integer"
+								},
+								"bus_id": {
+									"type": "integer"
+								},
+								"origin": {
+									"type": "string"
+								},
+								"destination": {
+									"type": "string"
+								},
+								"trip_date": {
+									"type": "string",
+									"format": "date"
+								},
+								"fare": {
+									"type": "integer"
+								}
+							}
+						}
+					}
+				}
+			},
+			"Trips-patch-response": {
+				"type": "object",
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"data": {
+						"type": "object",
+						"properties": {
+							"message": {
+								"type": "string"
+							}
+						}
+					}
+				}
+			},
+			"Bookings-post-request": {
+				"type": "object",
+				"properties": {
+					"trip_id": {
+						"type": "integer"
+					},
+					"seat_number": {
+						"type": "integer"
+					}
+				},
+				"required": [
+					"trip_id"
+				]
+			},
+			"Bookings-post-response": {
+				"type": "object",
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"data": {
+						"type": "object",
+						"properties": {
+							"id": {
+								"type": "integer"
+							},
+							"booking_id": {
+								"type": "integer"
+							},
+							"user_id": {
+								"type": "integer"
+							},
+							"trip_id": {
+								"type": "integer"
+							},
+							"bus_id": {
+								"type": "integer"
+							},
+							"trip_date": {
+								"type": "string",
+								"format": "date"
+							},
+							"seat_number": {
+								"type": "integer"
+							},
+							"first_name": {
+								"type": "string"
+							},
+							"last_name": {
+								"type": "string"
+							},
+							"email": {
+								"type": "string",
+								"format": "email"
+							}
+						}
+					}
+				}
+			},
+			"Bookings-get-response": {
+				"type": "object",
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"data": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"id": {
+									"type": "integer"
+								},
+								"user_id": {
+									"type": "integer"
+								},
+								"trip_id": {
+									"type": "integer"
+								},
+								"bus_id": {
+									"type": "integer"
+								},
+								"trip_date": {
+									"type": "string",
+									"format": "date"
+								},
+								"seat_number": {
+									"type": "integer"
+								},
+								"first_name": {
+									"type": "string"
+								},
+								"last_name": {
+									"type": "string"
+								},
+								"email": {
+									"type": "string",
+									"format": "email"
+								}
+							}
+						}
+					}
+				}
+			},
+			"Bookings-delete-response": {
+				"type": "object",
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"data": {
+						"type": "object",
+						"properties": {
+							"message": {
+								"type": "string"
+							}
+						}
+					}
+				}
+			},
+			"Buses-post-request": {
+				"type": "object",
+				"properties": {
+					"number_plate": {
+						"type": "integer"
+					},
+					"manufacturer": {
+						"type": "string"
+					},
+					"model": {
+						"type": "string"
+					},
+					"year": {
+						"type": "string",
+						"format": "integer"
+					},
+					"capacity": {
+						"type": "integer"
+					}
+				},
+				"required": [
+					"number_plate",
+					"manufacturer",
+					"model",
+					"year",
+					"capacity"
+				]
+			},
+			"Buses-post-response": {
+				"type": "object",
+				"properties": {
+					"status": {
+						"type": "string"
+					},
+					"data": {
+						"type": "object",
+						"properties": {
+							"message": {
+								"type": "string"
+							},
+							"id": {
+								"type": "integer"
+							}
+						}
+					}
+				}
+			}
+		},
+		"securitySchemes": {
+			"bearerAuth": {
+				"type": "http",
+				"scheme": "bearer",
+				"bearerFormat": "JWT"
+			}
+		}
+	}
+}

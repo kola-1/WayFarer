@@ -94,8 +94,7 @@ describe('Booking controller methods', () => {
                     .get('/api/v1/bookings')
                     .set('Authorization', token)
                     .send({
-                        token,
-                        trip_id: '2'
+                        token
                     })
                     .end((error, response) => {
                         expect(response.body).to.have.property('status');
@@ -120,7 +119,7 @@ describe('Booking controller methods', () => {
         chai.request(app)
             .post('/api/v1/auth/signin')
             .send({
-                email: 'admin@mail.com', password: process.env.ADMIN_PASSWORD
+                email: 'firstuser1@mail.com', password: process.env.USER1_PASSWORD
             })
             .end((err, res) => {
                 expect(res.status).to.equal(200);
@@ -130,13 +129,13 @@ describe('Booking controller methods', () => {
                     .set('Authorization', token)
                     .send({
                         token,
-                        trip_id: '2',
+                        trip_id: '1',
                         seat_number: '22'
                     })
                     .end(() => {
                         expect(res.status).to.equal(200);
                         chai.request(app)
-                            .delete('/api/v1/bookings/3')
+                            .delete('/api/v1/bookings/1')
                             .set('Authorization', token)
                             .send({
                                 token

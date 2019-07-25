@@ -1,15 +1,13 @@
 import express from 'express';
 import trimmer from 'trim-request-body';
-import cors from 'cors';
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from '../../../wayfarer-swagger-doc1.json';
 import auth from './routes/auth';
 import trips from './routes/trips';
 import bookings from './routes/bookings';
 import buses from './routes/buses';
 
 export default (wayfarer) => {
-    // allow cross origin access
-    wayfarer.use(cors());
-
     // Parse application/json
     wayfarer.use(express.json());
 
@@ -24,6 +22,7 @@ export default (wayfarer) => {
     wayfarer.use('/api/v1/trips', trips);
     wayfarer.use('/api/v1/bookings', bookings);
     wayfarer.use('/api/v1/buses', buses);
+    wayfarer.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
     wayfarer.use('*', (req, res) => {
         res.status(200).json({
