@@ -23,11 +23,16 @@ wayfarer.use((req, res, next) => {
             errorLog(`file path does not exist :(${appPath})`);
             return res.status(404).json({
                 status: 404,
-                message: 'Sorry, we cant find this endpoint',
+                message: 'Sorry, we cannot find this endpoint',
             });
         }
         /* eslint-disable-next-line global-require, import/no-dynamic-require */
         require(appPath).default(wayfarer);// pass an instance of express to api version entry point
+    } else {
+        return res.status(200).json({
+            status: 200,
+            message: 'Welcome to WayFarer API',
+        });
     }
     next();
 });

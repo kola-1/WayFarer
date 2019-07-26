@@ -27,7 +27,7 @@ export default (wayfarer) => {
     wayfarer.use('*', (req, res) => {
         res.status(200).json({
             status: 200,
-            message: 'Welcome to WayFarer',
+            message: 'Welcome to WayFarer API (version 1)',
         });
     });
 };

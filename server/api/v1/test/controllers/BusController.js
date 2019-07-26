@@ -34,8 +34,13 @@ describe('Bus controller methods', () => {
                         expect(response.body).to.have.property('status');
                         expect(response.body.status).to.equal('success');
                         expect(response.body).to.have.property('data');
-                        expect(response.body.data).to.have.property('message');
                         expect(response.body.data).to.have.property('id');
+                        expect(response.body.data).to.have.property('number_plate');
+                        expect(response.body.data).to.have.property('manufacturer');
+                        expect(response.body.data).to.have.property('model');
+                        expect(response.body.data).to.have.property('year');
+                        expect(response.body.data).to.have.property('capacity');
+                        expect(response.body.data).to.have.property('available');
                         expect(response.status).to.equal(201);
                         done();
                     });
