@@ -1,7 +1,7 @@
 import db from '../../models/dbConnect';
 import errors from '../errors/errorHandler';
 
-const verifyDeletePermission = (req, res, next) => {
+const verifyDeletion = (req, res, next) => {
     const { user_id } = req.userInfo;
 
     const { params } = req;
@@ -19,4 +19,4 @@ const verifyDeletePermission = (req, res, next) => {
     });
 };
 
-export default verifyDeletePermission;
+export default verifyDeletion;

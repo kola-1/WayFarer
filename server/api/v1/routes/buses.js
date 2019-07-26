@@ -11,8 +11,8 @@ const router = express.Router();
 // Add a bus
 const addBus = [
     verifyRequestToken,
-    confirmRole.admin,
     validateBus,
+    confirmRole.admin,
     BusController.addBus
 ];
 router.post('/', addBus);

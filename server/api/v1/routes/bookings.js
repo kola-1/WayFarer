@@ -1,6 +1,5 @@
 import express from 'express';
 import verifyRequestToken from '../middlewares/helpers/verifyRequestToken';
-import validateUser from '../middlewares/validations/validateUsers';
 import validateTrips from '../middlewares/validations/validateTrips';
 import validateBookings from '../middlewares/validations/validateBookings';
 import verifyTrip from '../middlewares/helpers/verifyTrip';
@@ -11,7 +10,7 @@ import checkBookingAvailability from '../middlewares/helpers/checkBookingAvailab
 import assignSeat from '../middlewares/helpers/assignSeat';
 import getRoleType from '../middlewares/helpers/getRoleType';
 import checkUserBookingExist from '../middlewares/helpers/checkUserBookingExist';
-import verifyDeletePermission from '../middlewares/helpers/verifyDeletePermission';
+import verifyDeletion from '../middlewares/helpers/verifyDeletion';
 import BookingController from '../controllers/BookingController';
 
 
@@ -22,7 +21,6 @@ const { validateTripId } = validateTrips;
 // Book a seat on a trip
 const bookATrip = [
     verifyRequestToken,
-    validateUser,
     validateTripId,
     validateBookings,
     verifyTrip,
@@ -38,7 +36,6 @@ router.post('/', bookATrip);
 // View bookings
 const viewBookings = [
     verifyRequestToken,
-    validateUser,
     getRoleType,
     fetchUserInfo,
     checkUserBookingExist,
@@ -49,9 +46,8 @@ router.get('/', viewBookings);
 // Delete booking
 const deleteBooking = [
     verifyRequestToken,
-    validateUser,
     fetchUserInfo,
-    verifyDeletePermission,
+    verifyDeletion,
     BookingController.delete
 ];
 router.delete('/:id', deleteBooking);

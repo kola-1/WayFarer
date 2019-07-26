@@ -4,8 +4,20 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const connectionString = (process.env.NODE_ENV === 'development') ? process.env.TEST_DB_URL
-    : process.env.DATABASE_URL;
+const nodeEnvironment = process.env.NODE_ENV;
+let connectionString;
+
+switch (nodeEnvironment) {
+case 'test':
+    connectionString = process.env.TEST_DB_URL;
+    break;
+case 'development':
+    connectionString = process.env.DEV_DB_URL;
+    break;
+default:
+    connectionString = process.env.DATABASE_URL;
+    break;
+}
 
 const pool = new Pool({
     connectionString

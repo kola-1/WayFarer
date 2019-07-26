@@ -58,16 +58,22 @@ To run this project on your development environment, install it locally from you
 ```
 npm install
 ```
+
+- *remember to add the **environment variables** as required in the **.env.config file***
+
+- *before running the server in development mode first set **NODE_ENV** to **development***
+
 **...run the following command to start the application with nodemon**
 ```
 npm run start-dev
 ```
-- *remember to add the **environment variables** as required in the **.env.config file***
 
 - *you can access the server locally on **port 7000** i.e `localhost:7000`*
 
 ### Testing And Coverage
 To run test and to get test coverage use the following command:
+
+- *before running the test or test coverage first set **NODE_ENV** to **test***
 
 **...run the following command for testing**
 ```
