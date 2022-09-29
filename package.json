@@ -32,7 +32,7 @@
     "@babel/preset-env": "^7.5.5",
     "@babel/register": "^7.5.5",
     "@babel/runtime": "^7.5.5",
-    "@hapi/joi": "^15.1.0",
+    "@hapi/joi": "^15.1.1",
     "bcryptjs": "^2.4.3",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
